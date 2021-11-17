@@ -31,7 +31,7 @@ url: "amanchoudhri.github.io" # the base hostname & protocol for your site, e.g.
 github_username:  amanchoudhri
 
 # Build settings
-theme: minima
+theme: poole/hyde
 plugins:
   - jekyll-feed
 
