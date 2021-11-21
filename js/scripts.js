@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         });
     });
-
+    // Add in spacing elements between inline list items
     let uls = document.getElementsByClassName('list-inline');
     for (let ul of uls) {
         // Use querySelectorAll instead of childNodes so it's static
