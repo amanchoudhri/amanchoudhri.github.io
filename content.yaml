@@ -87,11 +87,11 @@ education:
     - Honors Math B (MATH 1208)
 
 activities:
-- icon: <i class="fas fa-book-open text-primary"></i>
+- icon: <img src="images/book-open-solid.svg">
   name: Columbia Undergraduate Theoretical Computer Science Seminar
   start: 2022
   end: 2022
-- icon: <i class="bi bi-boombox-fill text-primary"></i>
+- icon: <img src="images/boombox-fill.svg">
   name: Columbia University Bhangra
   start: 2021
   description: 6 hours of practice per week, regular competitions and performances
