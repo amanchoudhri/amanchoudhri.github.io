@@ -18,6 +18,19 @@
         <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        
+        <style>
+                
+                #awards, #awardsDivider {
+                    display: none;
+                }
+                
+                #skills, #skillsDivider {
+                    display: none;
+                }
+                
+        </style>
+        
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -29,30 +42,52 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experience</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
-                    <!-- <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li> -->
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Awards</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#extracurriculars">Extracurriculars</a></li>
+                    
+                        
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" href="#about"> about</a>
+                            </li>
+                        
+                    
+                        
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" href="#experience"> experience</a>
+                            </li>
+                        
+                    
+                        
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" href="#education"> education</a>
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" href="#activities"> activities</a>
+                            </li>
+                        
+                    
                 </ul>
             </div>
         </nav>
         <!-- Page Content-->
-        <div class="container-fluid p-0">
+        <div class="container-fluid p-0" id="mainContent">
             <!-- About-->
             <section class="resume-section" id="about">
                 <div class="resume-section-content">
                     <h1 class="mb-0">
                         Aman <span class="text-primary">Choudhri</span>
                     </h1>
-                    <div class="subheading mb-5">
-                        Math and Computer Science, Columbia University '25
+                    <div class="subheading mb-5" id="tagline">
+                        Math and CS, Columbia University '25
                     </div>
-                    <p class="lead mb-5">
-                        Hello! I'm Aman Choudhri, a rising sophomore at Columbia University with a passion for using technology to better human lives.
-                        Currently, I'm a research assistant at the Flatiron Institute Center for Computational Neuroscience,
-                        in Professor Alex Williams's Neurostatistics Lab.
+                    <p class="lead mb-5" id="intro">
+                        Hello! I'm Aman Choudhri, a rising sophomore at Columbia with a passion for using technology to better human lives. Currently, I'm a research assistant at the Flatiron Institute Center for Computational Neuroscience, in Professor Alex Williams's <a href="http://neurostatslab.org/">Neurostatistics Lab</a>.
+
                     </p>
                     <div class="social-icons">
                         <a class="social-icon" href="mailto:aman.choudhri@columbia.edu"><i class="fas fa-envelope"></i></a>
@@ -61,85 +96,101 @@
                     </div>
                 </div>
             </section>
-            <hr class="m-0" />
+            <hr class="m-0" id='experienceDivider'/>
             <!-- Experience-->
             <section class="resume-section" id="experience">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Experience</h2>
+                    <h2 class="mb-5" id="experienceTitle">Experience</h2>
+                    
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Research Assistant</h3>
+                            <div class="subheading mb-3">Flatiron Institute</div>
+                            
+                                <p>I'm an intern at the Flatiron Institute's <a href="https://www.simonsfoundation.org/flatiron/center-for-computational-neuroscience/">Center for Computational Neuroscience</a> (CCN) in Professor Alex Williams's group. We're leveraging machine learning methods to characterize the vocal repertoire and social behaviors of gerbils in naturalistic environments.</p><p>My specific task is to help train deep neural networks to determine the location of a vocalization and assign it to a gerbil using only microphone array data, a project which will allow us to quantify and study sequences of vocalizations—or "conversations" between the gerbils. Currently, I'm working on quantifying uncertainty in the outputs from our CNN and transformer sound source localization models.</p><p></p>
+                                
+                            
+                        </div>
+                        <div class="flex-shrink-0">
+                            <span class="text-primary">June 2022 - August 2022</span>
+                        </div>
+                    </div>
+                    
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
                             <h3 class="mb-0">Research Intern</h3>
-                            <div class="subheading mb-3">IBM</div>
-                            <p>
-                                I'm using a causal inference technique known as incremental propensity score intervention on a cohort of ARDS patients from the MIMIC dataset to evaluate the causal effect of varying liberation strategies from ventilation on outcomes including mortality and ICU-free days. 
-                                For this project, I'm using Pandas to process and handle the electronic health records data and Sci-Kit Learn to train propensity score models.
-                            </p>
-                            <p>
-                                My mentors: Dr. Zachary Shahn, Research Staff Member at IBM, Dr. Li-Wei Lehman, Research Scientist at MIT, and Dr. Elias Baedorf Kassis, Instructor in Medicine at Harvard Medical School
-                            </p>
-                            <a href="https://github.com/amanchoudhri/earlier-mv-weaning">
-                                <img src="images/view_github.svg" alt="View on GitHub">
-                            </a>
+                            <div class="subheading mb-3">CUNY Graduate School of Public Health</div>
+                            
+                                <p>Along with my mentor, Professor Zach Shahn, I applied causal inference to help doctors better understand the process of weaning patients off mechanical ventilation. Specifically, we used a technique called incremental propensity score intervention to estimate how varying strategies for liberating ICU patients from mechanical ventilation affects outcomes like mortality and ICU-free days. Our paper, for which I’m a co-first author, is currently being reviewed at the Chest journal.</p><p></p>
+                                
+                                    <a href="https://github.com/amanchoudhri/liberation-timing-paper">
+                                        <img src="images/view_github.svg" alt="View on GitHub">
+                                    </a>
+                                
+                            
                         </div>
-                        <div class="flex-shrink-0"><span class="text-primary">January 2021 - Present</span></div>
+                        <div class="flex-shrink-0">
+                            <span class="text-primary">January 2021 - May 2022</span>
+                        </div>
                     </div>
+                    
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
                             <h3 class="mb-0">Software Development Intern</h3>
                             <div class="subheading mb-3">Columbia University Information Technology (CUIT)</div>
-                            <p>
-                                I was employed under Marina Arzumanyan, manager of Teaching and Learning Applications at CUIT, working 20 hours per week at $15 per hour.
-                                I assisted in the development of a SecurePay webapp using Django, creating various CRUD views for user management and order lookup.
-                                I also rewrote outdated unit tests for Columbia's LTI tools, a set of custom add-on utilities for the university's Canvas site.
-                            </p>
-                            <img style="cursor: not-allowed" src="images/cuit_gitlab.svg" alt="">
+                            
+                                <p>I was employed as a summer intern in the Teaching and Learning Applications division at CUIT. There, I assisted in the development of a SecurePay webapp using Django, creating various CRUD views for user management and order lookup. I also rewrote outdated unit tests for Columbia's LTI tools, a set of custom add-on utilities for the university's Canvas site.</p> <img style="cursor: not-allowed" src="images/cuit_gitlab.svg" alt="">
+
+                            
                         </div>
-                        <div class="flex-shrink-0"><span class="text-primary">May 2021 - September 2021</span></div>
+                        <div class="flex-shrink-0">
+                            <span class="text-primary">May 2021 - September 2021</span>
+                        </div>
                     </div>
+                    
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
                             <h3 class="mb-0">Student Developer</h3>
                             <div class="subheading mb-3">Biopragmatics Lab</div>
-                            <p class="mb-2">
-                                I contributed to a few Python packages created by my  mentor, <a href="https://cthoyt.com">Dr. Charles Tapley Hoyt</a>, specifically PyBEL and Bio2BEL.
-                                For my first project with Dr. Hoyt, I created the <i>pybel.schema</i> module, which added functions to PyBEL to verify the data format of a given entity.
-                                Throughout that project, I learned about JSON Schema and best practices for developing a suite of unit tests.
-                            </p>
-                            <a href="https://github.com/pybel/pybel/pull/450"><img src="images/pybel_github.svg" alt="View pybel.schema on Github"></a>
-                            <p class="mb-2 mt-3">
-                                Most recently, I integrated the <a href="https://www.rhea-db.org/">Rhea database</a> of reactions into Bio2BEL.
-                                This enabled reactions stored in the Rhea format to be parsed into Python objects fitting the Biological Expression Language (BEL) specification.
-                                In doing so, I helped assist in the integration of heterogenous biological data, a necessary first step for the computational analysis of the mechanisms of complex diseases.
-                            </p>
-                            <a href="https://github.com/bio2bel/bio2bel/pull/42"><img src="images/bio2bel_github.svg" alt="View Bio2BEL Rhea on GitHub"></a>
-                            </div>
-                        <div class="flex-shrink-0"><span class="text-primary">June 2020 - April 2021</span></div>
+                            
+                                <p class="mb-2">
+  I contributed to a few Python packages created by my  mentor, <a href="https://cthoyt.com">Dr. Charles Tapley Hoyt</a>, specifically PyBEL and Bio2BEL.
+  For my first project with Dr. Hoyt, I created the <i>pybel.schema</i> module, which added functions to PyBEL to verify the data format of a given entity.
+  Throughout that project, I learned about JSON Schema and best practices for developing a suite of unit tests.
+</p> <a href="https://github.com/pybel/pybel/pull/450"><img src="images/pybel_github.svg" alt="View pybel.schema on Github"></a> <p class="mb-2 mt-3">
+  Most recently, I integrated the <a href="https://www.rhea-db.org/">Rhea database</a> of reactions into Bio2BEL.
+  This enabled reactions stored in the Rhea format to be parsed into Python objects fitting the Biological Expression Language (BEL) specification.
+  In doing so, I helped assist in the integration of heterogenous biological data, a necessary first step for the computational analysis of the mechanisms of complex diseases.
+</p> <a href="https://github.com/bio2bel/bio2bel/pull/42"><img src="images/bio2bel_github.svg" alt="View Bio2BEL Rhea on GitHub"></a>
+
+                            
+                        </div>
+                        <div class="flex-shrink-0">
+                            <span class="text-primary">June 2020 - April 2021</span>
+                        </div>
                     </div>
+                    
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
                             <h3 class="mb-0">Data Science Volunteer</h3>
                             <div class="subheading mb-3">CoronaWhy</div>
-                            <p>
-                                I wrote various Python scripts to assist the efforts of a global team of researchers aiming to combat the COVID-19 pandemic using data science.
-                                In addition, I learned about natural language processing, specifically tf-idf scoring, word vectors, and recurrent neural networks.
-                            </p>
-                            <a href="https://github.com/amanchoudhri/misc-scripts"><img src="images/view_github.svg" alt="View on GitHub"></a>
+                            
+                                <p>I wrote various Python scripts to assist the efforts of a global team of researchers aiming to combat the COVID-19 pandemic using data science. In addition, I learned about natural language processing, specifically tf-idf scoring, word vectors, and recurrent neural networks.</p><p></p>
+                                
+                                    <a href="https://github.com/amanchoudhri/misc-scripts">
+                                        <img src="images/view_github.svg" alt="View on GitHub">
+                                    </a>
+                                
+                            
                         </div>
-                        <div class="flex-shrink-0"><span class="text-primary">April 2020 - September 2020</span></div>
+                        <div class="flex-shrink-0">
+                            <span class="text-primary">April 2020 - September 2020</span>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column flex-md-row justify-content-between">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-0">High School Research Intern</h3>
-                            <div class="subheading mb-3">Mount Sinai</div>
-                            <p>
-                                With the help of my mentor Dr. Eric Oermann, I compared the performance of standard machine learning training to federated learning, using PyTorch and a federated learning framework called PySyft.
-                                Our results showed that models trained using federated learning performed similarly well to models trained in a traditional, centralized setting.
-                            </p>
-                        </div>
-                        <div class="flex-shrink-0"><span class="text-primary">December 2018 - June 2020</span></div>
+                    
                 </div>
             </section>
-            <hr class="m-0" />
+            <hr class="m-0" id='educationDivider'/>
             <!-- Education-->
             <section class="resume-section" id="education">
                 <div class="resume-section-content">
@@ -147,23 +198,32 @@
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
                             <h3 class="mb-0">Columbia University</h3>
-                            <div class="subheading mb-3">BA, Math and Computer Science — GPA: 3.96</div>
+                            <div class="subheading mb-3">BA, Math and Computer Science — GPA: 4.02</div>
                             <p class="mb-1">
-                                <em class="text-primary">Relevant Coursework</em>
+                                <em class="text-primary">Current Classes</em>
                             </p>
                             <ul class="list-inline">
-                                <li class="list-inline-item">Honors Math A (MATH 1207): <b>A+</b></li>
-                                <li class="list-inline-item">Introduction to CS in Java (COMS 1004): <b>A</b></li>
+                                
+                                <li class="list-inline-item">Machine Learning (COMS 4771)</li>
+                                
+                                <li class="list-inline-item">Causal Inference (COMS 4775)</li>
+                                
+                                <li class="list-inline-item">Modern Algebra I (MATH 4041)</li>
+                                
                             </ul>
                             <p class="mb-1">
-                                <em class="text-primary">Current Semester</em>
+                                <em class="text-primary">Past Coursework</em>
                             </p>
                             <ul class="list-inline">
-                                <li class="list-inline-item">Honors Math B (MATH 1208)</li>
+                                
+                                <li class="list-inline-item">Introduction to CS in Java (COMS 1004)</li>
+                                
+                                <li class="list-inline-item">Honors Math A (MATH 1207)</li>
+                                
                                 <li class="list-inline-item">Data Structures in Java (COMS 3134)</li>
-                                <li class="list-inline-item">Hispanic Cultures I (SPAN 3349)</li>
-                                <li class="list-inline-item">Frontiers of Science (SCNC 1000)</li>
-                                <li class="list-inline-item">Literature Humanities (HUMA 1002)</li>
+                                
+                                <li class="list-inline-item">Honors Math B (MATH 1208)</li>
+                                
                             </ul>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">September 2021 - May 2025</span></div>
@@ -172,28 +232,15 @@
                         <div class="flex-grow-1">
                             <h3 class="mb-0">Briarcliff High School</h3>
                             <div class="subheading mb-3">Valedictorian — GPA: 104.5/100</div>
-                            <p class="mb-1">
-                                <em class="text-primary">Relevant AP Scores</em>
-                            </p>
-                            <ul class="list-inline" id="apscores">
-                                <li class="list-inline-item">Calculus BC: 5</li>
-                                <li class="list-inline-item">Statistics: 5</li>
-                                <li class="list-inline-item">Chemistry: 5</li>
-                                <li class="list-inline-item">Physics I: 5</li>
-                                <li class="list-inline-item">Physics II: 5</li>
-                                <li class="list-inline-item">Physics C, Mechanics: 5</li>
-                                <li class="list-inline-item">Physics C, Electricity and Magnetism: 5</li>
-                                <li class="list-inline-item">English Language and Composition: 5</li>
-                                <li class="list-inline-item">Spanish: 5</li>
-                            </ul>
+                            
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">September 2017 - May 2021</span></div>
                     </div>
                 </div>
             </section>
-            <hr class="m-0" />
+            <hr class="m-0" id='skillsDivider'/>
             <!-- if necessary add back later, but seems sort of useless for now -->
-            <!-- Skills
+            <!-- Skills -->
             <section class="resume-section" id="skills">
                 <div class="resume-section-content">
                     <h2 class="mb-5">Skills</h2>
@@ -218,8 +265,8 @@
                         </li>
                     </ul>
                 </div>
-            </section> -->
-            <!-- <hr class="m-0" /> -->
+            </section>
+            <hr class="m-0" id='awardsDivider'/>
             <!-- Awards-->
             <section class="resume-section" id="awards">
                 <div class="resume-section-content">
@@ -277,28 +324,44 @@
                     </ul>
                 </div>
             </section>
-            <hr class="m-0">
+            <hr class="m-0" id='interestsDivider'>
             <!-- Interests-->
-            <section class="resume-section" id="extracurriculars">
+            <section class="resume-section" id="activities">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Extracurriculars</h2>
+                    <h2 class="mb-5">Activities</h2>
                     <ul class="list-unstyled fa-ul">
+                        
                         <li class="mb-3">
                             <span class="fa-li"><i class="fas fa-book-open text-primary"></i></span>
-                            Columbia Undergraduate Theoretical Computer Science Seminar, <i>High-Dimensional Probability</i> group (2022-present)    
+                            Columbia Undergraduate Theoretical Computer Science Seminar
+                            
+                            (2022 -2022)
+                            
+                            
+                        </li>
+                        
                         <li class="mb-3">
                             <span class="fa-li"><i class="bi bi-boombox-fill text-primary"></i></span>
-                            Columbia University Bhangra (2021-present): 6 hours of practice per week, regular competitions and performances
+                            Columbia University Bhangra
+                            
+                            (2021-Present)
+                            
+                            
+                            : 6 hours of practice per week, regular competitions and performances
+                            
                         </li>
+                        
                         <li class="mb-3">
                             <span class="fa-li"><img src="images/piano_icon.svg"></span>
-                            Pianist (2008-present): state-level competitor at the Steinway Piano Competition
+                            Pianist
+                            
+                            (2008-Present)
+                            
+                            
+                            : In my spare time, I love to play Romantic and Impressionist works!
+                            
                         </li>
-                        <li class="">
-                            <span class="fa-li"><img src="images/violin_icon.svg"></span>
-                            Violinist (2014-present): performed in the Briarcliff High School orchestra, chamber ensemble, and pit orchestra
-                        </li>
-
+                        
                     </ul>
                 </div>
             </section>
