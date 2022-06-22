@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Aman Choudhri</title>
+        <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        
+        <style>
+                {% for section in hiddenSections %}
+                #{{section}}, #{{section}}Divider {
+                    display: none;
+                }
+                {% endfor %}
+        </style>
+        
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <span class="d-block d-lg-none">Aman Choudhri</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="images/avatar.png" alt="..." /></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    {% for s in sections %}
+                        {% if s not in hiddenSections %}
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" href="#{{ s }}"> {{ s }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </nav>
+        <!-- Page Content-->
+        <div class="container-fluid p-0" id="mainContent">
+            <!-- About-->
+            <section class="resume-section" id="about">
+                <div class="resume-section-content">
+                    <h1 class="mb-0">
+                        Aman <span class="text-primary">Choudhri</span>
+                    </h1>
+                    <div class="subheading mb-5" id="tagline">
+                        {{ about.tagline }}
+                    </div>
+                    <p class="lead mb-5" id="intro">
+                        {{ about.intro }}
+                    </p>
+                    <div class="social-icons">
+                        <a class="social-icon" href="mailto:aman.choudhri@columbia.edu"><i class="fas fa-envelope"></i></a>
+                        <a class="social-icon" href="https://github.com/amanchoudhri"><i class="fab fa-github"></i></a>
+                        <a class="social-icon" href="https://linkedin.com/in/aman-choudhri"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </section>
+            <hr class="m-0" id='experienceDivider'/>
+            <!-- Experience-->
+            <section class="resume-section" id="experience">
+                <div class="resume-section-content">
+                    <h2 class="mb-5" id="experienceTitle">Experience</h2>
+                    {% for e in experiences %}
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">{{e.title}}</h3>
+                            <div class="subheading mb-3">{{e.employer}}</div>
+                            {% if e.customDescription %}
+                                {{e.customDescription}}
+                            {% else %}
+                                {{e.description}}
+                                {% if e.githubLink %}
+                                    <a href="{{e.githubLink}}">
+                                        <img src="images/view_github.svg" alt="View on GitHub">
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <div class="flex-shrink-0">
+                            <span class="text-primary">{{e.start}} - {{e.end}}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            <hr class="m-0" id='educationDivider'/>
+            <!-- Education-->
+            <section class="resume-section" id="education">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Education</h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Columbia University</h3>
+                            <div class="subheading mb-3">BA, {{education.major}} — GPA: {{ education.gpa }}</div>
+                            <p class="mb-1">
+                                <em class="text-primary">Current Classes</em>
+                            </p>
+                            <ul class="list-inline">
+                                {% for c in education.currentClasses %}
+                                <li class="list-inline-item">{{c}}</li>
+                                {% endfor %}
+                            </ul>
+                            <p class="mb-1">
+                                <em class="text-primary">Past Coursework</em>
+                            </p>
+                            <ul class="list-inline">
+                                {% for c in education.pastClasses%}
+                                <li class="list-inline-item">{{c}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">September 2021 - May 2025</span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Briarcliff High School</h3>
+                            <div class="subheading mb-3">Valedictorian — GPA: 104.5/100</div>
+                            {# <p class="mb-1">
+                                <em class="text-primary">Relevant AP Scores</em>
+                            </p>
+                            <ul class="list-inline" id="apscores">
+                                <li class="list-inline-item">Calculus BC: 5</li>
+                                <li class="list-inline-item">Statistics: 5</li>
+                                <li class="list-inline-item">Chemistry: 5</li>
+                                <li class="list-inline-item">Physics I: 5</li>
+                                <li class="list-inline-item">Physics II: 5</li>
+                                <li class="list-inline-item">Physics C, Mechanics: 5</li>
+                                <li class="list-inline-item">Physics C, Electricity and Magnetism: 5</li>
+                                <li class="list-inline-item">English Language and Composition: 5</li>
+                                <li class="list-inline-item">Spanish: 5</li>
+                            </ul> #}
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">September 2017 - May 2021</span></div>
+                    </div>
+                </div>
+            </section>
+            <hr class="m-0" id='skillsDivider'/>
+            <!-- if necessary add back later, but seems sort of useless for now -->
+            <!-- Skills -->
+            <section class="resume-section" id="skills">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Skills</h2>
+                    <div class="subheading mb-3">Programming Languages & Tools</div>
+                    <div class="subheading mb-3">Workflow</div>
+                    <ul class="fa-ul mb-0">
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Mobile-First, Responsive Design
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Cross Browser Testing & Debugging
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Cross Functional Teams
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Agile Development & Scrum
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <hr class="m-0" id='awardsDivider'/>
+            <!-- Awards-->
+            <section class="resume-section" id="awards">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Awards & Honors</h2>
+                    <ul class="fa-ul mb-0">
+                        <li class="mb-1">
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            Valedictorian, Briarcliff High School (2021)
+                            
+
+                        </li>
+                        <li class="mb-1">
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            Yale University Book Award (2020) 
+                            
+                        </li>
+                        <li class="mb-1">
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            Briarcliff High School Book Award for Excellence in English Grade 11 (2020) 
+                            
+                        </li>
+                        <li class="mb-1">
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            National Merit Scholarship Finalist (2020)
+                            
+                        </li>
+                        <li class="mb-1">
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            U.S. Chemistry Olympiad National Finalist (2020)
+                           
+                        </li>
+                        <li class="mb-1">
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            International Avogadro Chemistry Exam Tile – top 3% worldwide (2019) 
+                        
+                        </li>
+                        <li class="mb-1">
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            2
+                            <sup>nd</sup>
+                            Place, Computer Science and Mathematics, Junior Science and Humanities Symposium (2020) 
+
+                        </li>
+                        <li class="mb-1">
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            1
+                            <sup>st</sup>
+                            Place, Computer Science, Somers Science Research Fair (2019) 
+
+                        </li>
+                        <li class="mb-1">
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            Gold Medal, National Spanish Exam (2018, 2019, 2020)
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <hr class="m-0" id='interestsDivider'>
+            <!-- Interests-->
+            <section class="resume-section" id="activities">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Activities</h2>
+                    <ul class="list-unstyled fa-ul">
+                        {% for a in activities %}
+                        <li class="mb-3">
+                            <span class="fa-li">{{a.icon}}</span>
+                            {{ a.name }}
+                            {% if a.end %}
+                            ({{ a.start }} -{{ a.end }})
+                            {% else %}
+                            ({{ a.start }}-Present)
+                            {% endif %}
+                            {% if a.description %}
+                            : {{ a.description }}
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
