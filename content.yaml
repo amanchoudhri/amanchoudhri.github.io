@@ -1,0 +1,102 @@
+# sections to hide (optional)
+hiddenSections: [awards, skills]
+
+# header section
+about:
+  tagline: Math and CS, Columbia University '25
+  intro: >
+    Hello! I'm Aman Choudhri, a rising sophomore at Columbia with a passion for using
+    technology to better human lives. Currently, I'm a research assistant at the Flatiron
+    Institute Center for Computational Neuroscience, in Professor Alex Williams's
+    <a href="http://neurostatslab.org/">Neurostatistics Lab</a>.
+
+# section content
+experience:
+- title: Research Assistant
+  employer: Flatiron Institute
+  start: June 2022
+  end: August 2022
+  description: >
+    I'm an intern at the Flatiron Institute's <a href="https://www.simonsfoundation.org/flatiron/center-for-computational-neuroscience/">Center for Computational Neuroscience</a>
+    (CCN) in Professor Alex Williams's group. We're leveraging machine learning methods
+    to characterize the vocal repertoire and social behaviors of gerbils in naturalistic
+    environments.
+
+    My specific task is to help train deep neural networks to determine
+    the location of a vocalization and assign it to a gerbil using only microphone
+    array
+    data, a project which will allow us to quantify and study sequences of vocalizations—or
+    "conversations" between the gerbils. Currently, I'm working on quantifying uncertainty
+    in the outputs from our CNN and transformer sound source localization models.
+- title: Research Intern
+  employer: CUNY Graduate School of Public Health
+  start: January 2021
+  end: May 2022
+  description: >
+    Along with my mentor, Professor Zach Shahn, I applied causal inference to help
+    doctors
+    better understand the process of weaning patients off mechanical ventilation.
+    Specifically, we used a technique called incremental propensity score intervention
+    to estimate how varying strategies for liberating ICU patients from mechanical
+    ventilation affects outcomes like mortality and ICU-free days. Our paper, for
+    which I’m a co-first author, is currently being reviewed at the Chest journal.
+  githubLink: https://github.com/amanchoudhri/liberation-timing-paper
+- title: Software Development Intern
+  employer: Columbia University Information Technology (CUIT)
+  start: May 2021
+  end: September 2021 
+  customDescription: >
+    <p>I was employed as a summer intern in the Teaching and Learning Applications division at CUIT. There, I assisted in the development of a SecurePay webapp using Django, creating various CRUD views for user management and order lookup. I also rewrote outdated unit tests for Columbia's LTI tools, a set of custom add-on utilities for the university's Canvas site.</p>
+    <img style="cursor: not-allowed" src="images/cuit_gitlab.svg" alt="">
+- title: Student Developer
+  employer: Biopragmatics Lab
+  start: June 2020
+  end: April 2021
+  customDescription: >
+    <p class="mb-2">
+      I contributed to a few Python packages created by my  mentor, <a href="https://cthoyt.com">Dr. Charles Tapley Hoyt</a>, specifically PyBEL and Bio2BEL.
+      For my first project with Dr. Hoyt, I created the <i>pybel.schema</i> module, which added functions to PyBEL to verify the data format of a given entity.
+      Throughout that project, I learned about JSON Schema and best practices for developing a suite of unit tests.
+    </p>
+    <a href="https://github.com/pybel/pybel/pull/450"><img src="images/pybel_github.svg" alt="View pybel.schema on Github"></a>
+    <p class="mb-2 mt-3">
+      Most recently, I integrated the <a href="https://www.rhea-db.org/">Rhea database</a> of reactions into Bio2BEL.
+      This enabled reactions stored in the Rhea format to be parsed into Python objects fitting the Biological Expression Language (BEL) specification.
+      In doing so, I helped assist in the integration of heterogenous biological data, a necessary first step for the computational analysis of the mechanisms of complex diseases.
+    </p>
+    <a href="https://github.com/bio2bel/bio2bel/pull/42"><img src="images/bio2bel_github.svg" alt="View Bio2BEL Rhea on GitHub"></a>
+- title: Data Science Volunteer
+  employer: CoronaWhy
+  start: April 2020
+  end: September 2020
+  description: >
+    I wrote various Python scripts to assist the efforts of a global team of researchers aiming to combat the COVID-19 pandemic using data science. In addition, I learned about natural language processing, specifically tf-idf scoring, word vectors, and recurrent neural networks.
+  githubLink: https://github.com/amanchoudhri/misc-scripts
+
+education:
+  major: Math and Computer Science
+  gpa: 4.02
+  currentClasses:
+    - Machine Learning (COMS 4771)
+    - Causal Inference (COMS 4775)
+    - Modern Algebra I (MATH 4041)
+  pastClasses:
+    - Introduction to CS in Java (COMS 1004)
+    - Honors Math A (MATH 1207)
+    - Data Structures in Java (COMS 3134)
+    - Honors Math B (MATH 1208)
+
+activities:
+- icon: <i class="fas fa-book-open text-primary"></i>
+  name: Columbia Undergraduate Theoretical Computer Science Seminar
+  start: 2022
+  end: 2022
+- icon: <i class="bi bi-boombox-fill text-primary"></i>
+  name: Columbia University Bhangra
+  start: 2021
+  description: 6 hours of practice per week, regular competitions and performances
+- icon: <img src="images/piano_icon.svg">
+  name: Pianist
+  start: 2008
+  description: In my spare time, I love to play Romantic and Impressionist works!
+
