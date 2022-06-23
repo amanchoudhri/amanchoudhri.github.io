@@ -87,15 +87,15 @@ education:
     - Honors Math B (MATH 1208)
 
 activities:
-- icon: <img src="images/book-open-solid.svg">
+- icon: <img src="images/book-open-solid.svg" class='icon'>
   name: Columbia Undergraduate Theoretical Computer Science Seminar
   start: 2022
   end: 2022
-- icon: <img src="images/boombox-fill.svg">
+- icon: <img src="images/boombox-fill.svg" class='icon'>
   name: Columbia University Bhangra
   start: 2021
   description: 6 hours of practice per week, regular competitions and performances
-- icon: <img src="images/piano_icon.svg">
+- icon: <img src="images/piano_icon.svg" class='icon'>
   name: Pianist
   start: 2008
   description: In my spare time, I love to play Romantic and Impressionist works!
