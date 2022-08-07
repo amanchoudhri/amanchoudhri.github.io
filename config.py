@@ -1,6 +1,10 @@
-YAML_FILE = 'content.yaml'
-JINJA_TEMPLATE = 'base.jinja'
-HTML_INDEX = 'index.html'
+from pathlib import Path
+
+directory = Path(__file__).parent
+
+YAML_FILE = directory / 'content.yaml'
+JINJA_TEMPLATE = directory / 'base.jinja'
+HTML_INDEX = directory / 'index.html'
 
 SECTIONS = ['about', 'experience', 'education', 'skills', 'awards', 'activities']
 
