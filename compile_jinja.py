@@ -1,15 +1,17 @@
 """Compile the content.yaml file to HTML."""
 
-import yaml
+from ruamel.yaml import YAML
 
 from jinja2 import Template
 
 from config import HTML_INDEX, JINJA_TEMPLATE, YAML_FILE, SECTIONS
 
+yaml = YAML(typ='safe')
+
 def load_yaml(file=YAML_FILE) -> dict:
     """Load and return the given YAML file. By default, load content.yaml."""
     with open(file, 'r') as file:
-        content = yaml.safe_load(file)
+        content = yaml.load(file)
     return content
 
 def jinjafy_experience(e):
