@@ -41,7 +41,7 @@ def new(section):
     # get the section information from the user
     new_entry = click.edit(blank_fields(section), extension='.yaml')
     # open the raw content.yaml file
-    with open('content.yaml', 'r') as f:
+    with open(YAML_FILE, 'r') as f:
         lines = f.readlines()
     # get the line number in the yaml file where the given section begins
     section_start = -1
@@ -81,7 +81,7 @@ def yaml_to_string(yaml_obj) -> str:
 @click.argument('section', type=click.Choice(SECTIONS, case_sensitive=False))
 def edit(section):
     # read in yaml for given section
-    with open('content.yaml', 'r') as f:
+    with open(YAML_FILE, 'r') as f:
         raw_text = f.read()
         data = yaml.load(raw_text)
 
@@ -142,7 +142,7 @@ def edit(section):
 @click.argument('section', type=click.Choice(SECTIONS, case_sensitive=False))
 def delete(section):
     # read in yaml for given section
-    with open('content.yaml', 'r') as f:
+    with open(YAML_FILE, 'r') as f:
         raw_text = f.read()
         data = yaml.load(raw_text)
     multiple_entries = False
