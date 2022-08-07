@@ -1,4 +1,6 @@
+from dataclasses import dataclass
 import io
+import os
 import pprint
 
 from typing import Iterable
@@ -7,10 +9,16 @@ import click
 from ruamel.yaml import YAML
 
 from compile_jinja import compile_jinja
-from config import YAML_FILE, SECTIONS, FIELDS
+from config import YAML_FILE, JINJA_TEMPLATE, SECTIONS, FIELDS, HTML_INDEX
 
 
 yaml = YAML()
+
+@dataclass
+class Result:
+    """Utility class to store whether changes should be commited."""
+    should_commit: bool
+    commit_msg: str = ''
 
 
 def blank_fields(section: str):
@@ -31,8 +39,28 @@ def actions():
 
 
 @actions.result_callback()
-def callback(result, **kwargs):
-    compile_jinja()
+def callback(sc: Result, **kwargs):
+    """
+    Callback, run after every main action.
+
+    If `sc.should_commit`, commits the jinja template
+    and html index files with commit message `sc.commit_msg`.
+    """
+    if sc.should_commit:
+        try:
+            compile_jinja()
+        except Exception as e:
+            print(f'Compiling jinja failed with exception: {e}')
+            return
+
+        repo_directory = YAML_FILE.parent
+
+        os.system(
+            f'cd {repo_directory} &&'
+            f'git add {JINJA_TEMPLATE} {HTML_INDEX} &&'
+            f'git commit -m "{sc.commit_msg}" &&'
+            'git push'
+            )
 
 
 @actions.command()
@@ -40,6 +68,8 @@ def callback(result, **kwargs):
 def new(section):
     # get the section information from the user
     new_entry = click.edit(blank_fields(section), extension='.yaml')
+    if new_entry is None:
+        return Result(False)
     # open the raw content.yaml file
     with open(YAML_FILE, 'r') as f:
         lines = f.readlines()
@@ -48,11 +78,15 @@ def new(section):
     for i, line in enumerate(lines):
         if section in line:
             section_start = i
+    # TODO: verify valid response before writing to file
     # insert the information after the line where the section begins
     lines.insert(section_start + 1, new_entry)
     # write to file
     with open(YAML_FILE, 'w') as f:
         f.writelines(lines)
+
+    commit_msg = f'Created new section {section}'
+    return Result(True, commit_msg)
 
 
 def display_dict(d):
@@ -122,7 +156,7 @@ def edit(section):
     # if the user quit without saving
     if edited is None:
         click.secho('Edit aborted.', fg='red')
-        return
+        return Result(False)
 
     # replace old with edited entry
     edited_yaml = yaml.load(edited)
@@ -136,6 +170,7 @@ def edit(section):
         yaml.dump(data, f)
     
     click.secho('Change successful!', fg=40) # bright green, see 8-bit terminal colors
+    return Result(True, f'Edit section {section}')
     
 
 @actions.command()
@@ -182,7 +217,7 @@ def delete(section):
 
     if not answer:
         click.echo('Delete aborted.')
-        return
+        return Result(False)
 
     # delete the entries from the yaml object
     if multiple_entries:
@@ -194,6 +229,7 @@ def delete(section):
         yaml.dump(data, f)
     
     click.secho('Change successful!', fg=40) # bright green, see 8-bit terminal colors    
+    return Result(True, f'Deleted section {section}')
 
 
 def prettify(strs: Iterable[str]):
