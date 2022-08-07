@@ -17,7 +17,8 @@ experience:
   start: June 2022
   end: August 2022
   description: >
-    I'm an intern at the Flatiron Institute's <a href="https://www.simonsfoundation.org/flatiron/center-for-computational-neuroscience/">Center for Computational Neuroscience</a>
+    I'm an intern at the Flatiron Institute's <a href="https://www.simonsfoundation.org/flatiron/center-for-computational-neuroscience/">Center
+    for Computational Neuroscience</a>
     (CCN) in Professor Alex Williams's group. We're leveraging machine learning methods
     to characterize the vocal repertoire and social behaviors of gerbils in naturalistic
     environments.
@@ -44,9 +45,13 @@ experience:
 - title: Software Development Intern
   employer: Columbia University Information Technology (CUIT)
   start: May 2021
-  end: September 2021 
+  end: September 2021
   customDescription: >
-    <p>I was employed as a summer intern in the Teaching and Learning Applications division at CUIT. There, I assisted in the development of a SecurePay webapp using Django, creating various CRUD views for user management and order lookup. I also rewrote outdated unit tests for Columbia's LTI tools, a set of custom add-on utilities for the university's Canvas site.</p>
+    <p>I was employed as a summer intern in the Teaching and Learning Applications
+    division at CUIT. There, I assisted in the development of a SecurePay webapp using
+    Django, creating various CRUD views for user management and order lookup. I also
+    rewrote outdated unit tests for Columbia's LTI tools, a set of custom add-on utilities
+    for the university's Canvas site.</p>
     <img style="cursor: not-allowed" src="images/cuit_gitlab.svg" alt="">
 - title: Student Developer
   employer: Biopragmatics Lab
@@ -54,37 +59,49 @@ experience:
   end: April 2021
   customDescription: >
     <p class="mb-2">
-      I contributed to a few Python packages created by my  mentor, <a href="https://cthoyt.com">Dr. Charles Tapley Hoyt</a>, specifically PyBEL and Bio2BEL.
-      For my first project with Dr. Hoyt, I created the <i>pybel.schema</i> module, which added functions to PyBEL to verify the data format of a given entity.
-      Throughout that project, I learned about JSON Schema and best practices for developing a suite of unit tests.
+      I contributed to a few Python packages created by my  mentor, <a href="https://cthoyt.com">Dr.
+    Charles Tapley Hoyt</a>, specifically PyBEL and Bio2BEL.
+      For my first project with Dr. Hoyt, I created the <i>pybel.schema</i> module,
+    which added functions to PyBEL to verify the data format of a given entity.
+      Throughout that project, I learned about JSON Schema and best practices for
+    developing a suite of unit tests.
     </p>
-    <a href="https://github.com/pybel/pybel/pull/450"><img src="images/pybel_github.svg" alt="View pybel.schema on Github"></a>
+    <a href="https://github.com/pybel/pybel/pull/450"><img src="images/pybel_github.svg"
+    alt="View pybel.schema on Github"></a>
     <p class="mb-2 mt-3">
-      Most recently, I integrated the <a href="https://www.rhea-db.org/">Rhea database</a> of reactions into Bio2BEL.
-      This enabled reactions stored in the Rhea format to be parsed into Python objects fitting the Biological Expression Language (BEL) specification.
-      In doing so, I helped assist in the integration of heterogenous biological data, a necessary first step for the computational analysis of the mechanisms of complex diseases.
+      Most recently, I integrated the <a href="https://www.rhea-db.org/">Rhea database</a>
+    of reactions into Bio2BEL.
+      This enabled reactions stored in the Rhea format to be parsed into Python objects
+    fitting the Biological Expression Language (BEL) specification.
+      In doing so, I helped assist in the integration of heterogenous biological data,
+    a necessary first step for the computational analysis of the mechanisms of complex
+    diseases.
     </p>
-    <a href="https://github.com/bio2bel/bio2bel/pull/42"><img src="images/bio2bel_github.svg" alt="View Bio2BEL Rhea on GitHub"></a>
+    <a href="https://github.com/bio2bel/bio2bel/pull/42"><img src="images/bio2bel_github.svg"
+    alt="View Bio2BEL Rhea on GitHub"></a>
 - title: Data Science Volunteer
   employer: CoronaWhy
   start: April 2020
   end: September 2020
   description: >
-    I wrote various Python scripts to assist the efforts of a global team of researchers aiming to combat the COVID-19 pandemic using data science. In addition, I learned about natural language processing, specifically tf-idf scoring, word vectors, and recurrent neural networks.
+    I wrote various Python scripts to assist the efforts of a global team of researchers
+    aiming to combat the COVID-19 pandemic using data science. In addition, I learned
+    about natural language processing, specifically tf-idf scoring, word vectors,
+    and recurrent neural networks.
   githubLink: https://github.com/amanchoudhri/misc-scripts
 
 education:
-  major: Math and Computer Science
-  gpa: 4.02
+  major: Math
+  gpa: 4.06
   currentClasses:
-    - Machine Learning (COMS 4771)
-    - Causal Inference (COMS 4775)
-    - Modern Algebra I (MATH 4041)
+  - Machine Learning (COMS 4771)
+  - Causal Inference (COMS 4775)
+  - Fourier Analysis (MATH 4032)
   pastClasses:
-    - Introduction to CS in Java (COMS 1004)
-    - Honors Math A (MATH 1207)
-    - Data Structures in Java (COMS 3134)
-    - Honors Math B (MATH 1208)
+  - Introduction to CS in Java (COMS 1004)
+  - Honors Math A (MATH 1207)
+  - Data Structures in Java (COMS 3134)
+  - Honors Math B (MATH 1208)
 
 activities:
 - icon: <img src="images/book-open-solid.svg" class='icon'>
