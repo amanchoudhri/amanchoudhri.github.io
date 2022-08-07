@@ -85,7 +85,7 @@ def new(section):
     with open(YAML_FILE, 'w') as f:
         f.writelines(lines)
 
-    commit_msg = f'Created new section {section}'
+    commit_msg = f'Created new entry in section: {section}'
     return Result(True, commit_msg)
 
 
@@ -170,7 +170,7 @@ def edit(section):
         yaml.dump(data, f)
     
     click.secho('Change successful!', fg=40) # bright green, see 8-bit terminal colors
-    return Result(True, f'Edit section {section}')
+    return Result(True, f'Edit section: {section}')
     
 
 @actions.command()
@@ -229,7 +229,7 @@ def delete(section):
         yaml.dump(data, f)
     
     click.secho('Change successful!', fg=40) # bright green, see 8-bit terminal colors    
-    return Result(True, f'Deleted section {section}')
+    return Result(True, f'Delete entry in section: {section}')
 
 
 def prettify(strs: Iterable[str]):
