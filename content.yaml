@@ -3,7 +3,7 @@ hiddenSections: [awards, skills]
 
 # header section
 about:
-  tagline: Math and CS, Columbia University '25
+  tagline: Mathematics @  Columbia University
   intro: >
     Hello! I'm Aman Choudhri, a rising sophomore at Columbia with a passion for using
     technology to better human lives. Currently, I'm a research assistant at the Flatiron
@@ -91,7 +91,7 @@ experience:
   githubLink: https://github.com/amanchoudhri/misc-scripts
 
 education:
-  major: Math
+  major: Mathematics
   gpa: 4.06
   currentClasses:
   - Machine Learning (COMS 4771)
