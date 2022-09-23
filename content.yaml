@@ -5,8 +5,9 @@ hiddenSections: [awards, skills]
 about:
   tagline: Mathematics @ Columbia University, '25
   intro: >
-    Hello! I'm Aman Choudhri, a rising sophomore at Columbia with a passion for using
-    technology to better human lives. Currently, I'm a research assistant at the Flatiron
+    Hello! I'm Aman Choudhri, a second-year undergraduate at Columbia with a passion
+    for using
+    technology to better human lives. Currently, I'm a guest researcher at the Flatiron
     Institute Center for Computational Neuroscience, in Professor Alex Williams's
     <a href="http://neurostatslab.org/">Neurostatistics Lab</a>.
 
@@ -79,24 +80,13 @@ experience:
     </p>
     <a href="https://github.com/bio2bel/bio2bel/pull/42"><img src="images/bio2bel_github.svg"
     alt="View Bio2BEL Rhea on GitHub"></a>
-- title: Data Science Volunteer
-  employer: CoronaWhy
-  start: April 2020
-  end: September 2020
-  description: >
-    I wrote various Python scripts to assist the efforts of a global team of researchers
-    aiming to combat the COVID-19 pandemic using data science. In addition, I learned
-    about natural language processing, specifically tf-idf scoring, word vectors,
-    and recurrent neural networks.
-  githubLink: https://github.com/amanchoudhri/misc-scripts
-
 education:
   major: Mathematics
   gpa: 4.06
   currentClasses:
-  - Machine Learning (COMS 4771)
-  - Causal Inference (COMS 4775)
-  - Fourier Analysis (MATH 4032)
+  - Foundations of Graphical Models (STCS 6701)
+  - Convex Optimization (EEOR 4650)
+  - Modern Analysis II (MATH 4062)
   pastClasses:
   - Introduction to CS in Java (COMS 1004)
   - Honors Math A (MATH 1207)
@@ -111,9 +101,9 @@ activities:
 - icon: <img src="images/boombox-fill.svg" class='icon'>
   name: Columbia University Bhangra
   start: 2021
-  description: 6 hours of practice per week, regular competitions and performances
+  description: Secretary and member of competitive dance team, 6+ hours of practice per week
 - icon: <img src="images/piano_icon.svg" class='icon'>
-  name: Pianist
+  name: Amateur Pianist
   start: 2008
   description: In my spare time, I love to play Romantic and Impressionist works!
 
