@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- 'Inter' Typeface -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
+
+    <title>{{ page.title }}</title>
+
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+
+
+  align-self: center;
+
+  display: flex;
+  align-items: center; /* centers vertically */
+  justify-content: center; /* centers horizontally */
+
+  --main-background-color: #fffef9;
+  --main-text: #333333;
+  --secondary-text: #6b6b6b;
+
+  background-color: var(--main-background-color);
+  color: var(--main-text);
+
+  font-family: "Inter", -apple-system, sans-serif;
+  background-size: 20px 20px; /* Sets the size of the repeating background image (grid cell) */
+  background-image: url("../../../assets/img/bg-e3e2e0.png");
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 720px;
+    height: 100vh;
+    background-color: var(--main-background-color);
+    padding: 0px 5px;
+    gap: 0px;
+}
+.content {
+    padding: 0px;
+    margin: 0px;
+    margin-top: 15px;
+    background-color: var(--main-background-color);
+}
+
+#nav {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+#nav h4 {
+    margin: 0px;
+    color: var(--main-text);
+}
+
+#nav a {
+    padding: 2px 0px;
+    background-color: var(--main-background-color);
+    color: var(--main-text);
+    text-decoration: none;
+}
+
+.front-matter {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.front-matter p {
+    line-height: 1.4em;
+}
+
+#title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 2em;
+}
+
+#subtitle {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#date {
+    color: var(--secondary-text);
+    margin: 0;
+}
+
+#line {
+    width: 80%;
+    align-self: center;
+}
+
+.article h2 {
+    margin-bottom: 0;
+    margin-top: 1em;
+}
+.article h3 {
+    margin-bottom: 0;
+    margin-top: 0.75em;
+}
+.article p {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    line-height: 1.5em;
+}
+
+</style>
+
+  </head>
+  <body>
+    <div class="container">
+
+    <div id='nav'>
+    <h4><a href='/'>Aman Choudhri</a></h4>
+    <a href='/blog'>Blog</a>
+    </div>
+
+    <div class='content'>
+        <div class='front-matter'>
+            <h1 id="title">{{ page.title }}</h1>
+            <p id="date">{{ page.date |  date: "%Y-%m-%d" }}</p>
+            <p id="subtitle">
+            <!-- <span id="date">{{ page.date |  date: "%Y-%m-%d" }}</span> -->
+            {{ page.subtitle }}
+            </p>
+            <img id='line' src='/assets/img/line.png'></img>
+        </div>
+        <div class='article'>
+            {{ content }}
+        </div>
+    </div>
+    </div>
+  </body>
+</html>
