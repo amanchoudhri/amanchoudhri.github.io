@@ -1,0 +1,124 @@
+---
+layout: default
+title: "Aman Choudhri"
+---
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<!-- 'Inter' Typeface -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+
+
+  align-self: center;
+
+  display: flex;
+  align-items: center; /* centers vertically */
+  justify-content: center; /* centers horizontally */
+
+  --main-background-color: #fffef9;
+  --text-color: #333333;
+
+  background-color: var(--main-background-color);
+  color: var(--text-color);
+
+  font-family: "Inter", -apple-system, sans-serif;
+  background-size: 20px 20px; /* Sets the size of the repeating background image (grid cell) */
+  background-image: url("assets/img/bg-e3e2e0.png");
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    background-color: var(--main-background-color);
+}
+
+#photo {
+    width: 300px;
+}
+
+.info {
+    flex: 0 0 auto;
+    width: 300px;
+    line-height: 1.4;
+}
+
+#handwritten-name {
+    width: 200px;
+}
+
+#name {
+    font-size: 1.75em;
+    margin: 0;
+}
+
+#menu {
+    margin-top: 0.5vh;
+    padding-left: 0;
+}
+
+#menu li {
+    display: inline;
+    margin-right: 3px;
+}
+
+#menu a {
+    color: var(--text-color);
+}
+
+#quote {
+    font-style: italic;
+}
+
+#signature {
+    height: 60px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <img id="photo" src="assets/img/me.jpg"></img>
+
+    <div class="info">
+        <!-- <img id="handwritten-name" src="assets/img/name-bg.png"></img> -->
+        <h1 id="name">Aman Choudhri</h1>
+        <ul id="menu">
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="https://github.com/amanchoudhri">GitHub</a></li>
+            <li><a href="">CV</a></li>
+        </ul>
+
+        <p id="quote">
+        What are you afraid of—the living of it?
+        </p>
+
+        <p>
+        A recent statistics and math graduate from Columbia University. I'm interested
+        in probabilistic machine learning and the science of language modeling.
+        </p>
+        <p>
+        In my free time, I love to hike, dance, and cook.
+        </p>
+
+        <img id="signature" src="assets/img/signature.png"></img>
+    </div>
+
+</div>
+
+</body>
+
+</html>

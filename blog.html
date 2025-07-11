@@ -1,0 +1,137 @@
+---
+layout: default
+title: "Aman Choudhri"
+---
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<style>
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+
+
+  align-self: center;
+
+  display: flex;
+  align-items: center; /* centers vertically */
+  justify-content: center; /* centers horizontally */
+
+  --main-background-color: #fffef9;
+  --main-text: #333333;
+  --secondary-text: #6b6b6b;
+
+  background-color: var(--main-background-color);
+  color: var(--main-text);
+
+  font-family: "Inter", -apple-system, sans-serif;
+  background-size: 20px 20px; /* Sets the size of the repeating background image (grid cell) */
+  background-image: url("assets/img/bg-e3e2e0.png");
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 720px;
+    height: 100vh;
+    background-color: var(--main-background-color);
+    gap: 40px;
+}
+
+#nav {
+    width: 100%;
+}
+
+#nav h4 a {
+    padding: 2px 0px;
+    background-color: var(--main-background-color);
+}
+
+a {
+    color: var(--main-text);
+    text-decoration: none;
+}
+
+.post-row {
+    padding: 0px 15px;
+    height: 130px;
+    display: grid;
+    grid-template-columns: 120px auto;
+    gap: 25px;
+    background-color: var(--main-background-color);
+    margin-bottom: 25px;
+}
+.post-info {
+    display: flex;
+    flex-direction: column;
+}
+.info-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-title {
+    font-size: 1.25em;
+}
+
+.info-row h3 {
+    margin: 0;
+}
+.info-row p {
+    margin: 0;
+}
+.thumbnail {
+    width: 120px;
+}
+.post-date {
+    color: var(--secondary-text);
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div class="container">
+    <div id='nav'>
+    <h4><a href='/'>Aman Choudhri</a></h4>
+    </div>
+
+    <div id="posts">
+        {% for post in site.posts %}
+        <div class='post-row'>
+            <a href="{{ post.url }}">
+            <img class="thumbnail" src="assets/img/thumbnails/{{ post.thumbnail }}"></img>
+            </a>
+            <div class='post-info'>
+            <div class='info-row'>
+            <h3 class='post-title'>
+                <a href="{{ post.url }}">
+                    {{ post.title }}
+                </a>
+            </h3>
+            <p class='post-date'>
+                {{ post.date | date: "%Y-%m-%d"}}
+            </p>
+            </div>
+            <p class='post-subtitle'>
+                {{ post.subtitle }}
+            </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+</body>
+
+</html>
