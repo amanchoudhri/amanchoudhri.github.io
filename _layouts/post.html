@@ -122,6 +122,13 @@ body {
     line-height: 1.5em;
 }
 
+.article img {
+    width: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 </style>
 
   </head>
@@ -138,7 +145,6 @@ body {
             <h1 id="title">{{ page.title }}</h1>
             <p id="date">{{ page.date |  date: "%Y-%m-%d" }}</p>
             <p id="subtitle">
-            <!-- <span id="date">{{ page.date |  date: "%Y-%m-%d" }}</span> -->
             {{ page.subtitle }}
             </p>
             <img id='line' src='/assets/img/line.png'></img>
