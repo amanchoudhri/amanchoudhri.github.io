@@ -40,12 +40,47 @@ body {
 .container {
     display: flex;
     flex-direction: row;
-    gap: 2vw;
+    gap: 35px;
     background-color: var(--main-background-color);
+}
+
+#photo-wrapper {
+    position: relative;
+    display: inline-block; /* Wraps tightly around the image */
 }
 
 #photo {
     width: 300px;
+}
+
+/* Top-right corner */
+#photo-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -13px;
+    right: -13px;
+    width: 40px; /* Adjust to match your image size */
+    height: 40px;
+    background-image: url('assets/img/top-right.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 100; /* Ensures corner appears above photo */
+}
+
+/* Bottom-left corner */
+#photo-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 40px; /* Adjust to match your image size */
+    height: 40px;
+    background-image: url('assets/img/bottom-left.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 100; /* Ensures corner appears above photo */
 }
 
 .info {
@@ -91,15 +126,16 @@ body {
 <body>
 
 <div class="container">
-    <img id="photo" src="assets/img/me.jpg"></img>
+    <div id='photo-wrapper'>
+        <img id="photo" src="assets/img/me.jpg"></img>
+    </div>
 
     <div class="info">
-        <!-- <img id="handwritten-name" src="assets/img/name-bg.png"></img> -->
         <h1 id="name">Aman Choudhri</h1>
         <ul id="menu">
             <li><a href="/blog">Blog</a></li>
             <li><a href="https://github.com/amanchoudhri">GitHub</a></li>
-            <li><a href="">CV</a></li>
+            <li><a href="/assets/resume.pdf">Resume</a></li>
         </ul>
 
         <p id="quote">
