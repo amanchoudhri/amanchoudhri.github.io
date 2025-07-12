@@ -116,7 +116,10 @@ Each output computed, \(\text{RNN}(x)_{i}\), is the result of \(i\) recursive ap
 In theory, \(h_i\) should be able to represent all the relevant information from the previous sequence tokens. But in practice, RNNs don't learn to compress this information well.[^3]
 
 
-Self-attention sidesteps this compression problem. It removes the hidden state bottleneck and directly mixes features from other tokens. In doing so, self-attention also parallelizes the sequence-to-sequence computation.
+Self-attention sidesteps this compression problem. It removes the hidden state bottleneck and directly mixes features from other tokens.
+
+
+In doing so, self-attention also parallelizes the sequence-to-sequence computation.
 
 
 RNNs are inherently sequential, since their output at time \(t+1\) depends on the previous hidden state \(h_t\). But with self-attention, each output term \(\text{Attention}(x)_{i}\) and \(\text{Attention}(x)_{j}\) can be computed completely in parallel.
@@ -126,14 +129,14 @@ This parallelization, however, does come at a cost.
 
 
 ### Observation 2: Self-attention has no "interaction terms"
-Because self-attention parallelizes the similarity computation for output \(i\) across all input elements \(j\) at once, it is severely restricted in the way it can combine information from input tokens.
+Because self-attention parallelizes the similarity computation for output \(i\) across all input elements \(j\) at once, it's quite restricted in the way it can combine information from input tokens.
 
 
 Specifically, self-attention can only 'combine' information from tokens \(j, k\) into \(\text{Attention}(x)_{i}\) through the linear mixing
 \[
 A_{ij}V_{j} + A_{ik}V_{k}.
 \]
-Even the linear mixing weights \(A_{ij}\) and \(A_{ik}\) depend largely only on the *individual* similarities \(\kappa(x_i, x_{j})\) and \(\kappa(x_i, x_{k})\) . This turns out to limit the kinds of computations that a single layer of self-attention can perform.[^4]
+Even the linear mixing weights \(A_{ij}\) and \(A_{ik}\) depend largely only on the *individual* similarities \(\kappa(x_i, x_{j})\) and \(\kappa(x_i, x_{k})\) . This turns out to limit the kinds of computations that (a single layer of) self-attention can perform.[^4]
 
 
 Various generalizations of self-attention aiming to address this limitation by incorporating interaction terms have been proposed.
