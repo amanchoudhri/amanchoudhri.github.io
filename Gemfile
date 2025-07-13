@@ -13,9 +13,9 @@ source "https://rubygems.org"
 gem "github-pages", "~> 232", group: :jekyll_plugins
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.12"
-  gem "jektex"
-  gem "kramdown-parser-gfm"
+  gem "jekyll-feed", "~> 0.17"
+  gem "jektex", "~> 0.1.1"
+  gem "kramdown-parser-gfm", "~> 1.1.0"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
