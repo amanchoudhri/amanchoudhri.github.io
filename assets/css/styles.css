@@ -11,6 +11,9 @@
 
   /* Link color for within article body */
   --article-link: #4a8045;
+
+  /* Left/right padding for centered page elements*/
+  --container-inset: 30px;
 }
 body {
   margin: 0;
@@ -54,6 +57,8 @@ a {
     gap: 10px;
     padding-top: 20px;
     padding-bottom: 30px;
+    padding-left: var(--container-inset);
+    padding-right: var(--container-inset);
 
     background-color: var(--main-background-color);
     background-image: none;
@@ -169,13 +174,8 @@ a {
 
 .container {
     width: var(--content-width);
-    height: 100vh;
     background-color: var(--main-background-color);
-    padding: 0px 15px;
-}
-
-#nav {
-    width: 100%;
+    padding: 0px var(--container-inset);
 }
 
 #posts {
