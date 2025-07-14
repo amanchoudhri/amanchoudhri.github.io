@@ -13,10 +13,12 @@
   --article-link: #4a8045;
 
   /* Left/right padding for centered page elements*/
+  --mobile-container-inset: 10px;
   --container-inset: 30px;
 }
 * {
     margin: 0;
+    box-sizing: border-box;
 }
 body {
   min-height: 100dvh;
@@ -95,10 +97,15 @@ p {
     gap: 2rem;
     background-color: var(--main-background-color);
     margin: auto; /* Center content vertically on desktop */
+    padding: var(--mobile-container-inset);
 }
 
 #photo { 
-    width: 150px;  /* smaller on mobile */
+    width: 150px;
+    height: 189px;
+    background-image: url('/assets/img/me-mobile.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 #photo-wrapper {
@@ -136,33 +143,6 @@ p {
     z-index: 1; /* Ensures corner appears above photo */
 }
 
-/* Desktop override */
-@media (min-width: 768px) {
-    #homepage-container {
-        flex-direction: row;
-    }
-    #photo-wrapper {
-        order: -1; /* Put the photo on the left */
-    }
-    #photo-wrapper::before {
-        width: 40px;
-        height: 40px;
-        top: -12px;
-        right: -12px;
-    }
-    #photo-wrapper::after {
-        width: 40px;
-        height: 40px;
-        bottom: -14px;
-        left: -14px;
-    }
-    #photo {
-        width: 300px;
-    }
-}
-
-
-
 .info {
     width: 300px;
     line-height: 1.4;
@@ -187,19 +167,43 @@ p {
 
 #menu li {
     display: inline;
-    margin-right: 3px;
+    margin-right: 0.3rem;
 }
 
 #menu a {
     text-decoration: underline;
 }
 
-/* #quote { */
-/*     font-style: italic; */
-/* } */
-
 #signature {
     height: 60px;
+}
+
+/* Desktop override */
+@media (min-width: 768px) {
+    #homepage-container {
+        flex-direction: row;
+        padding: var(--container-inset);
+    }
+    #photo-wrapper {
+        order: -1; /* Put the photo on the left */
+    }
+    #photo-wrapper::before {
+        width: 40px;
+        height: 40px;
+        top: -12px;
+        right: -12px;
+    }
+    #photo-wrapper::after {
+        width: 40px;
+        height: 40px;
+        bottom: -14px;
+        left: -14px;
+    }
+    #photo {
+        width: 300px;
+        height: 374px;
+        background-image: url('/assets/img/me-desktop.jpg');
+    }
 }
 
 /* ==================
@@ -217,31 +221,42 @@ p {
     display: flex;
     flex-direction: column;
     gap: 25px;
+    margin-top: 0.5rem;
 }
 
-.post-row {
-    height: 130px;
-    display: grid;
-    grid-template-columns: 120px auto;
-    gap: 25px;
-}
-.post-info {
-    display: flex;
-    flex-direction: column;
-}
 .info-row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .post-title {
     font-size: 1.25em;
 }
 
+.post-date {
+    white-space: nowrap;
+}
+
 .thumbnail {
-    width: 120px;
+    display: none;
+}
+
+/* Desktop override */
+@media (min-width: 768px) {
+    .thumbnail {
+        width: 120px;
+        display: block;
+    }
+    .post-row {
+        height: 130px;
+        display: grid;
+        grid-template-columns: 120px auto;
+        gap: 25px;
+    }
 }
 
 /* ==================
@@ -258,19 +273,28 @@ p {
 /* } */
 
 #title {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: 2em;
+    margin-bottom: 0.2rem;
+    font-size: 2rem;
 }
 
 #subtitle {
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 1.1rem;
+    margin-bottom: 0.6rem;
 }
 
 #line {
     width: 80%;
     align-self: center;
+}
+
+#line-divider {
+    width: 80%;
+    align-self: center;
+    height: 40px;
+    background-image: url("/assets/img/line-mobile.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
 .article h2 {
@@ -286,7 +310,7 @@ p {
 }
 
 .article img {
-    width: 400px;
+    width: 280px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -294,4 +318,13 @@ p {
 
 .article a {
     color: var(--article-link);
+}
+
+@media (min-width: 768px) {
+    .article img {
+        width: 400px;
+    }
+    #line-divider {
+        background-image: url("/assets/img/line.png");
+    }
 }
