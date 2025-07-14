@@ -26,7 +26,7 @@ V = xW^V,
 for some low-dimensional projection matrix \(W^V \in \mathbb{R}^{d \times d_{v}}\). Think of \(V\) as a *batched* projection of \(x\), so each sequence element is passed through the same projection.
 
 
-![Handdrawn illustration of the equation V = xW^V]({{site.url}}/assets/img/attn-close-reading-V.png)
+![Handdrawn illustration of the equation V = xW^V](/assets/img/attn-close-reading-V.png)
 
 
 ## Attention matrix, \(A\)
@@ -35,7 +35,7 @@ xMx^T,
 \]for some learnable matrix \(M \in \mathbb{R}^{d \times d}\). Each element \(ij\) represents the dot product (in the geometry defined by \(M\)) between input vectors \(x_i\) and \(x_j\). The matrix \(M\) may be asymmetric, so\[
 (xMx^T)_{ij} \neq (xMx^T)_{ji},
 \]in general. 
-![Handdrawn image illustrating the matrix xMx^T]({{site.url}}/assets/img/attn-close-reading-xMx.png)
+![Handdrawn image illustrating the matrix xMx^T](/assets/img/attn-close-reading-xMx.png)
 
 
 The attention matrix \(A\) is constructed by passing this kernel matrix through an element-wise nonnegative function \(\psi\), then normalizing each row to have unit sum. Specifically,
