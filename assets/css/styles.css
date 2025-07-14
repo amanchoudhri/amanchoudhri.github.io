@@ -269,9 +269,9 @@ p {
     flex-direction: column;
 }
 
-/* .front-matter p { */
-/*     line-height: 1.4rem; */
-/* } */
+.front-matter p {
+    line-height: 1.3rem;
+}
 
 #title {
     margin-bottom: 0.2rem;
@@ -307,7 +307,7 @@ p {
 .article p {
     margin-top: 0.7rem;
     margin-bottom: 1.3rem;
-    line-height: 1.4rem;
+    line-height: 1.5rem;
 }
 
 .article img {
