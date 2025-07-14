@@ -145,11 +145,12 @@ p {
 
 .info {
     width: 300px;
-    line-height: 1.4;
+    line-height: 1.35;
 }
 
 .info p {
-    margin-top: 1rem;
+    margin-top: 0.8rem;
+    line-height: 1.5;
 }
 
 #handwritten-name {
@@ -172,6 +173,11 @@ p {
 
 #menu a {
     text-decoration: underline;
+}
+
+#email {
+    font-size: 0.8rem;
+    opacity: 80%;
 }
 
 #signature {
