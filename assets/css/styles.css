@@ -15,9 +15,11 @@
   /* Left/right padding for centered page elements*/
   --container-inset: 30px;
 }
+* {
+    margin: 0;
+}
 body {
-  margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
   min-width: 100vw;
 
 
@@ -41,6 +43,14 @@ a {
     text-decoration: none;
 }
 
+h1 {
+    font-size: 1.75rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
 /* ==================
    NAV BAR
    ================== */
@@ -62,10 +72,6 @@ a {
     background-image: none;
 }
 
-#site-nav h4 {
-    margin: 0px;
-}
-
 /* ==================
    UTILITY CLASSES
    ================== */
@@ -84,10 +90,15 @@ a {
 
 #homepage-container {
     display: flex;
-    flex-direction: row;
-    gap: 35px;
+    flex-direction: column;  /* stack on mobile */
+    align-items: center;
+    gap: 2rem;
     background-color: var(--main-background-color);
-    margin: auto;
+    margin: auto; /* Center content vertically on desktop */
+}
+
+#photo { 
+    width: 150px;  /* smaller on mobile */
 }
 
 #photo-wrapper {
@@ -95,44 +106,70 @@ a {
     display: inline-block; /* Wraps tightly around the image */
 }
 
-#photo {
-    width: 300px;
-}
-
 /* Top-right corner */
 #photo-wrapper::before {
     content: '';
     position: absolute;
-    top: -13px;
-    right: -13px;
-    width: 40px; /* Adjust to match your image size */
-    height: 40px;
+    top: -10px;
+    right: -10px;
+    width: 30px; /* Adjust to match your image size */
+    height: 30px;
     background-image: url('../img/top-right.png');
     background-size: contain;
     background-repeat: no-repeat;
     pointer-events: none;
-    z-index: 100; /* Ensures corner appears above photo */
+    z-index: 1; /* Ensures corner appears above photo */
 }
 
 /* Bottom-left corner */
 #photo-wrapper::after {
     content: '';
     position: absolute;
-    bottom: -15px;
-    left: -15px;
-    width: 40px; /* Adjust to match your image size */
-    height: 40px;
+    bottom: -12px;
+    left: -12px;
+    width: 30px; /* Adjust to match your image size */
+    height: 30px;
     background-image: url('../img/bottom-left.png');
     background-size: contain;
     background-repeat: no-repeat;
     pointer-events: none;
-    z-index: 100; /* Ensures corner appears above photo */
+    z-index: 1; /* Ensures corner appears above photo */
 }
 
+/* Desktop override */
+@media (min-width: 768px) {
+    #homepage-container {
+        flex-direction: row;
+    }
+    #photo-wrapper {
+        order: -1; /* Put the photo on the left */
+    }
+    #photo-wrapper::before {
+        width: 40px;
+        height: 40px;
+        top: -12px;
+        right: -12px;
+    }
+    #photo-wrapper::after {
+        width: 40px;
+        height: 40px;
+        bottom: -14px;
+        left: -14px;
+    }
+    #photo {
+        width: 300px;
+    }
+}
+
+
+
 .info {
-    flex: 0 0 auto;
     width: 300px;
     line-height: 1.4;
+}
+
+.info p {
+    margin-top: 1rem;
 }
 
 #handwritten-name {
@@ -140,12 +177,11 @@ a {
 }
 
 #name {
-    font-size: 1.75em;
-    margin: 0;
+    font-size: 1.75rem;
 }
 
 #menu {
-    margin-top: 0.5vh;
+    margin-top: 0.3rem;
     padding-left: 0;
 }
 
@@ -155,13 +191,12 @@ a {
 }
 
 #menu a {
-    color: var(--main-text);
     text-decoration: underline;
 }
 
-#quote {
-    font-style: italic;
-}
+/* #quote { */
+/*     font-style: italic; */
+/* } */
 
 #signature {
     height: 60px;
@@ -172,7 +207,8 @@ a {
    ================== */
 
 .container {
-    width: var(--content-width);
+    max-width: var(--content-width);
+    width: 100%;
     background-color: var(--main-background-color);
     padding: 0px var(--container-inset);
 }
@@ -204,12 +240,6 @@ a {
     font-size: 1.25em;
 }
 
-.info-row h3 {
-    margin: 0;
-}
-.info-row p {
-    margin: 0;
-}
 .thumbnail {
     width: 120px;
 }
@@ -219,14 +249,13 @@ a {
    ================== */
 
 .front-matter {
-    margin: 0px;
     display: flex;
     flex-direction: column;
 }
 
-.front-matter p {
-    line-height: 1.4em;
-}
+/* .front-matter p { */
+/*     line-height: 1.4rem; */
+/* } */
 
 #title {
     margin-top: 5px;
@@ -239,27 +268,21 @@ a {
     margin-bottom: 10px;
 }
 
-#date {
-    margin: 0;
-}
-
 #line {
     width: 80%;
     align-self: center;
 }
 
 .article h2 {
-    margin-bottom: 0;
     margin-top: 1em;
 }
 .article h3 {
-    margin-bottom: 0;
     margin-top: 0.75em;
 }
 .article p {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    line-height: 1.5em;
+    margin-top: 0.7rem;
+    margin-bottom: 1.3rem;
+    line-height: 1.4rem;
 }
 
 .article img {
