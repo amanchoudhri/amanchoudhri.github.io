@@ -26,7 +26,7 @@ V = xW^V,
 for some low-dimensional projection matrix \(W^V \in \mathbb{R}^{d \times d_{v}}\). Think of \(V\) as a *batched* projection of \(x\), so each sequence element is passed through the same projection.
 
 
-![Handdrawn illustration of the equation V = xW^V](/assets/img/attn-close-reading-V.png)
+![Handdrawn illustration of the equation V = xW^V](/assets/img/attn-close-reading/values.png)
 
 
 ## Attention matrix, \(A\)
@@ -35,7 +35,7 @@ xMx^T,
 \]for some learnable matrix \(M \in \mathbb{R}^{d \times d}\). Each element \(ij\) represents the dot product (in the geometry defined by \(M\)) between input vectors \(x_i\) and \(x_j\). The matrix \(M\) may be asymmetric, so\[
 (xMx^T)_{ij} \neq (xMx^T)_{ji},
 \]in general. 
-![Handdrawn image illustrating the matrix xMx^T](/assets/img/attn-close-reading-xMx.png)
+![Handdrawn image illustrating the matrix xMx^T](/assets/img/attn-close-reading/kernel.png)
 
 
 The attention matrix \(A\) is constructed by passing this kernel matrix through an element-wise nonnegative function \(\psi\), then normalizing each row to have unit sum. Specifically,
@@ -62,11 +62,11 @@ Each combination weight \(A_{ij}\) is determined based on the kernel similarity 
 In practice, we don't learn the bilinear form matrix \(M\) directly. Instead, we constrain its rank (and hopefully make it easier to learn) by parameterizing as a product of lower-dimensional factors.
 
 
-We pre-specify a maximum rank \(d_k\), and parameterize \(M\) in terms of learnable \(d_k \times d\) matrices \(W^Q, W^K\), as follows:
+We pre-specify a maximum rank \(d_k\), and parameterize \(M\) in terms of learnable \(d \times d_{k}\) matrices \(W^Q, W^K\), as follows:
 \[
 M = \frac{1}{\sqrt{d_{k}}} (W^Q)(W^K)^T.
 \]
-The product is scaled by \(\frac{1}{\sqrt{ d_{k} }}\) to limit the magnitude of the row entries in practice. The goal is to avoid pushing the softmax inputs into regions where the nonlinearity has very small gradients.
+The product is scaled by \(\frac{1}{\sqrt{ d_{k} }}\) to limit the magnitude of the entries in practice. The goal is to avoid pushing the softmax inputs into regions where the nonlinearity has very small gradients.
 
 
 ## The usual notation
@@ -116,9 +116,11 @@ Each output computed, \(\text{RNN}(x)_{i}\), is the result of \(i\) recursive ap
 In theory, \(h_i\) should be able to represent all the relevant information from the previous sequence tokens. But in practice, RNNs don't learn to compress this information well.[^3]
 
 
+![Graphic illustrating the internal distance between tokens in RNNs](/assets/img/attn-close-reading/rnn-token-distance.png)
 Self-attention sidesteps this compression problem. It removes the hidden state bottleneck and directly mixes features from other tokens.
 
 
+![Graphic illustrating the shorter distance between tokens in self-attention](/assets/img/attn-close-reading/self-attn-token-distance.png)
 In doing so, self-attention also parallelizes the sequence-to-sequence computation.
 
 
@@ -136,7 +138,7 @@ Specifically, self-attention can only 'combine' information from tokens \(j, k\)
 \[
 A_{ij}V_{j} + A_{ik}V_{k}.
 \]
-Even the linear mixing weights \(A_{ij}\) and \(A_{ik}\) depend largely only on the *individual* similarities \(\kappa(x_i, x_{j})\) and \(\kappa(x_i, x_{k})\) . This turns out to limit the kinds of computations that (a single layer of) self-attention can perform.[^4]
+Even the linear mixing weights \(A_{ij}\) and \(A_{ik}\) depend largely only on the *individual* similarities \(\text{Kernel}(x_i, x_{j})\) and \(\text{Kernel}(x_i, x_{k})\). This turns out to limit the kinds of computations that (a single layer of) self-attention can perform.[^4]
 
 
 Various generalizations of self-attention aiming to address this limitation by incorporating interaction terms have been proposed.
@@ -145,6 +147,7 @@ Various generalizations of self-attention aiming to address this limitation by i
 The basic concept of "higher-order attention" is simple, and fits nicely into the framework we've discussed. For concreteness, let's consider third-order attention.[^5]
 
 
+#### Third-Order Attention
 There are two key changes. Rather than mixing individual features \(V_j\) associated with individual tokens \(x_j\), we mix *pair* features \(V_{j, k}\) associated with token *pairs* \(x_{j, k}\). Rather than defining the mixing weights for output \(i\) using the similarity between \(x_{i}\) and all other tokens \(x_{j}\), we mix the pair features based on the similarity between \(x_i\) and all *pairs* of tokens \(x_j, x_k\).
 
 
@@ -152,7 +155,10 @@ The final form of third-order attention is semantically equivalent to standard a
 \[
 \text{Attention}_{3}(x)_{i} = \sum_{j, k}\big[ \text{Normalize}(\text{Kernel}(x, x, x)) \big]_{i, j, k} \text{Features}_{j,k}(x)
 \]
-Unfortunately, there are no free lunches. Higher-order attention is significantly more expensive. Standard self-attention is \(O(S^2)\), but third-order attention is \(O(S^3)\), since we now need to compute an \(S \times S \times S\) attention *tensor* rather than an \(S \times S\) attention matrix.
+Recent research has demonstrated practical performance improvements from incorporating higher-order attention layers [(Roy et al, 2025)](https://arxiv.org/abs/2507.02754).
+
+
+But unfortunately, there are no free lunches. Higher-order attention is significantly more expensive. Whereas standard self-attention is \(O(S^2)\), third-order attention is \(O(S^3)\), since we now need to compute an \(S \times S \times S\) attention *tensor* rather than an \(S \times S\) attention matrix.
 
 
 ## Conclusion
