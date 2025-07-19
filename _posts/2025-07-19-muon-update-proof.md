@@ -6,10 +6,13 @@ date: 2025-07-19
 thumbnail: muon.png
 filetitle: muon-update-proof
 ---
-In Jeremy Bernstein's great post [Deriving Muon](https://jeremybernste.in/writing/deriving-muon), he motivates the weight update for the Muon optimizer using a constrained optimization problem. He gives the solution for the optimal weight update, but I wasn't sure how he arrived at it.
+*This article expects comfort with undergraduate linear algebra. It aims to be explicit and self-contained, with proofs of useful lemmas included in the appendix.*
 
 
-In this post, I provide a quick optimality proof of the solution using only basic linear algebra. If you're already familiar with Muon and the constrained optimization problem used to derive its weight update, [click here](#a-proof-of-optimality) to jump to the proof.
+In Jeremy Bernstein's great post [Deriving Muon](https://jeremybernste.in/writing/deriving-muon), he motivates the weight update for the [Muon optimizer](https://kellerjordan.github.io/posts/muon/) using a constrained optimization problem. He gives the solution for the optimal weight update, but I wasn't sure how he arrived at it.
+
+
+In this post, I provide an optimality proof of the solution. If you're already familiar with Muon and the constrained optimization problem used to derive its weight update, [click here](#a-proof-of-optimality) to jump to the proof.
 
 
 ## A quick recap of Muon
@@ -17,28 +20,33 @@ Define a loss function \(\mathcal{L}\). Consider it as a function of the weights
 \[
 \mathcal{L}(W) + \langle \nabla_{W} \mathcal{L}, \Delta W \rangle,
 \]
-using the first-order Taylor approximation. Here, the inner product \(\langle \cdot, \cdot \rangle\) is the *Frobenius inner product*,\[
+using the first-order Taylor approximation. Here, the inner product \(\langle \cdot, \cdot \rangle\) is the *Frobenius inner product* on matrices,\[
 \langle A, B \rangle := \mathrm{Tr}(A^TB).
 \]Using this Taylor approximation, the *change* in loss is therefore roughly the inner product
 \[
 \mathcal{L}(W + \Delta W) - \mathcal{L}(W) \approx \langle \nabla_{W} \mathcal{L}, \Delta W \rangle.
 \]
 Muon aims to maximize the improvement in loss, subject to a norm constraint on \(\Delta W\). 
-Specifically, it employs the *root-mean-square operator norm*, \(\|\cdot \|_\text{RMS}.\) We'll properly derive it below, but the quick definition is:
+Specifically, it employs the *root-mean-square operator norm*, \(\|\cdot \|_\text{RMS}.\) We'll properly derive this norm below. But briefly, \(\|A\|_{\text{RMS}}\) is the *largest* possible factor by which a matrix \(A \in \mathbb{R}^{m \times n}\) can scale the size of its input, normalized by dimension:
 \[
-\| A \|_{\text{RMS}} := \sqrt{ \frac{n}{m} } \sigma_{\text{max}}(A), \tag{1}
+\|A\|_{\text{RMS}} := \sqrt{ \frac{n}{m} } \text{sup}_{x \neq 0} \frac{\|Ax\|_{2}}{\|x\|_{2}}
 \]
-for an \(m \times n\) matrix \(A\) whose largest singular value is \(\sigma_\text{max}(A)\).
-
-
 So we arrive at the constrained optimization problem (\(\dagger\)) that motivated Muon:
 \[
 \text{min} \  \langle \nabla_{W} \mathcal{L}, \Delta W \rangle \quad \text{s.t.} \quad \|\Delta W\|_\text{RMS} \leq \eta. \tag{†}
 \]
-If we take the singular value decomposition of the gradient as \(\nabla_{W} \mathcal{L} = U \Sigma V^T\), then the solution to \((\dagger)\) is given as the "orthogonalization": \[
+The requirement that \(\|\Delta W\|_\text{RMS} < \eta\) is equivalent to the condition that the change in the layer's outputs is bounded by the size of its inputs:
+\[
+\|(\Delta W)x\|_{\text{RMS}} = \|(W + \Delta W)x - Wx \|_{\text{RMS}}
+< \eta \sqrt{ \frac{m}{n} } \|x\|_{\text{2}},
+\]
+for all \(x\). The constraint \(\|\Delta W\|_{\text{RMS}} < \eta\) directly ensures that the layer's outputs don't change too much within an optimization step.
+
+
+If we take the singular value decomposition of the gradient as \(\nabla_{W} \mathcal{L} = U \Sigma V^T\), then the solution to \((\dagger)\) is given as the "orthogonalization," \[
 \Delta W^* = -\eta \sqrt{ \frac{m}{n} } UV^T. \tag{§}
 \]
-In this post, we'll derive this solution and prove that it is optimal for (\(\dagger\)).
+In this post, we'll derive this solution and prove that it is optimal for (\(\dagger\)). First, some background on the RMS operator norm.
 
 
 ## Preliminaries: RMS norm
@@ -50,40 +58,32 @@ A useful fact for intuition is that the RMS norm is just the \(\ell_2\) norm, re
 \[
 \|\mathbf{1}\|_{\text{RMS}} = \frac{1}{\sqrt{ n }} \|\mathbf{1}\|_{2} = \frac{1}{\sqrt{n }} \sqrt{ n } = 1.
 \]
-With this, we can also define a norm on matrices.
+This rescaling allows for a "dimension-invariant" notion of \(\ell_2\) size.
+
+
+We can use this vector norm to define a norm on matrices.
 
 
 ## Preliminaries: RMS operator norm
 The RMS *operator norm* is defined to be the largest multiple that a matrix \(A\) can increase the RMS norm of its input:\[
 \|A\|_{\text{RMS}} := \text{sup}_{x \neq 0} \frac{\|Ax\|_{\text{RMS}}}{\|x\|_{\text{RMS}}}.
 \]
-Let's connect this to the definition from \((1)\): \(\| A\|_\text{RMS} = \eta \sqrt{ n / m } \ \sigma_\text{max}(A)\).
-
-
-Expanding the RMS operator norm using the RMS *vector* norm definition,
+This is trivially equivalent to the definition from \((1)\). Expanding the RMS operator norm using the RMS *vector* norm definition,
 \[
 \|A\|_{\text{RMS}} = \text{sup}_{x \neq 0} 
-\frac{(1 / \sqrt{ m })\|Ax\|_{2}}{(1 / \sqrt{ n })\|x\|_{2}} = \sqrt{\frac{n}{m} } \text{sup}_{x \neq 0} \frac{\|Ax\|_{2}}{\|x\|_2}
+\frac{(1 / \sqrt{ m })\|Ax\|_{2}}{(1 / \sqrt{ n })\|x\|_{2}} = \sqrt{\frac{n}{m} } \text{sup}_{x \neq 0} \frac{\|Ax\|_{2}}{\|x\|_2}.
 \]
-For those familiar, the solution to the right-hand supremum is known as the *spectral norm*,
-\[
+The RMS operator norm can also be expressed in terms of the singular values of \(A\). For those familiar, the right-hand supremum in the equation above is known as the *spectral norm*, \[
 \|A\|_{*} := \text{sup}_{x \neq 0} \frac{\|Ax\|_{2}}{\|x\|_{2}}.
 \]
-And it turns out that the spectral norm of a matrix, the most \(A\) can stretch a vector in the \(\ell_2\)  sense, is precisely its largest singular value:
+The spectral norm of a matrix, the most \(A\) can stretch a vector in the \(\ell_2\)  sense, is precisely its largest singular value:
 \[
 \|A\|_{*} = \text{sup}_{x \neq 0} \frac{\|Ax\|_{2}}{\|x\|_{2}} = \sigma_{\text{max}}(A).
 \]
-See [Fact 1](#fact-1) for a formal proof. But taking the equality at face value, we can now connect the two definitions and write
+See [Fact 1](#fact-1) for a formal proof. Taking the equality at face value, we now observe,
 \[
 \|A\|_{\text{RMS}} = \text{sup}_{x \neq 0} \frac{\|Ax\|_{\text{RMS}}}{\|x\|_{\text{RMS}}} = \sqrt{ \frac{n}{m} } \text{sup}_{x \neq 0} \frac{\|Ax\|_{\text{2}}}{\|x\|_{\text{2}}} = \sqrt{ \frac{n}{m} } \sigma_\text{max}(A).
 \]
-So the requirement that \(\|\Delta W\|_\text{RMS} < \eta\) is equivalent to the condition that
-\[
-\|(\Delta W)x\|_{\text{RMS}} < \eta \|x\|_{\text{RMS}},
-\]
-for all \(x\).
-
-
 We now have all the machinery we need to solve the Muon problem (\(\dagger\)). Before we do so, let's warm up with a simpler problem.
 
 
@@ -99,8 +99,7 @@ b = \frac{\alpha}{\|a\|_{2}} a.
 Picking \(b\) to be "aligned with" \(a\) to maximize the inner product is pretty intuitive. But how might we prove this?
 
 
-### Proof
-One option is to assume that we've found a *better* candidate, say \(c\), and find a logical contradiction. If we find a contradiction, the better candidate \(c\) cannot actually exist—so we win.
+*Proof:* One option is to assume that we've found a *better* candidate, say \(c\), and find a logical contradiction. If we find a contradiction, the better candidate \(c\) cannot actually exist—so we win.
 
 
 Specifically, let's assume that we have \(c\) such that
@@ -122,6 +121,9 @@ So \(c\) doesn't satisfy the norm constraint, meaning it is *not* a valid soluti
 
 
 But the only thing we asked of \(c\) is that it has a better objective value than \(b\). Therefore the same argument applies to *all* vectors \(x\) with \(a^Tx > a^T b\). This means that all vectors \(x\) with a strictly larger objective value are invalid solutions. In other words, \(b\) is optimal.
+
+
+*End proof.*
 
 
 With this, we're now equipped to analyze the Muon problem.
@@ -184,7 +186,7 @@ We can simplify this expression even further. If we pull out the diagonal elemen
 \[
 \langle -\nabla_{W} \mathcal{L}, M \rangle = \sum_{i} \Sigma_{ii} D_{ii} = \sum_{i} \sigma_{i} d_{i} = \sigma^T d.
 \]
-We've now reduced the *matrix*-valued inner product objective to a *vector*-valued inner product.
+We've now reduced the *matrix* inner product objective to a *vector* inner product.
 
 
 We can also express the \(\mathrm{RMS}\) norm of \(M\) in terms of \(d\). Since the entries of \(d\) are the singular values of \(M\) by construction, we have that \[
@@ -206,15 +208,21 @@ Under our constraint on \(d_i\), then, the best solution to this reduced problem
 \[
 d_{i} := \eta \sqrt{ \frac{m}{n} }.
 \]
-If this isn't obvious, try to prove it yourself!
+If this isn't immediately obvious, try to prove it yourself.
 
 
-So the best solution to our restricted matrix-domain problem is \[
+Translating from the vector parameter \(d\) to the matrix parameter \(M\), the best solution to our restricted matrix-domain problem is therefore \[
 M = (-U)DV^T = (-U)(d_{i}I)V^T = -\eta \sqrt{ \frac{m}{n} }UV^T.
 \]This is precisely the optimal value (\(\S\)) given by Bernstein!
 
 
-And now it's maybe clearer why it's a good idea to define our weight update as the negative gradient \(-\nabla_{W} \mathcal{L}\) with its singular values "clamped" to \(\eta \sqrt{ m / n }\).
+It's now clearer why it's a good idea to define our weight update as the negative gradient \(-\nabla_{W} \mathcal{L}\) with its singular values "clamped" to \(\eta \sqrt{ m / n }\).
+
+
+For a weight update \(M\) in the same singular basis as \(-\nabla_{W}\mathcal{L}\), the inner product objective and the RMS norm are expressible entirely in terms of the singular values of \(-\nabla_{W} \mathcal{L}\) and \(M\). The inner product objective turns into a dot product between two nonnegative singular value vectors \(\sigma, d\). And the RMS norm constraint turns into an element-wise maximum constraint on the singular values \(d\) of \(M\). The optimal solution is therefore just to clamp the parameters \(d\) to their maximum allowable values.
+
+
+Just like the warmup problem, then, the solution is a "rescaled" (singular value clamped) matrix \(M\) "in the direction of" (in the same singular basis as) the negative gradient \(-\nabla_{W} \mathcal{L}\).
 
 
 With this intuition, we can dive into the proof.
@@ -224,7 +232,7 @@ With this intuition, we can dive into the proof.
 The proof is not as elegant as the warmup, since we can't use Cauchy-Schwarz.[^2] But it relies on the same contradiction technique.
 
 
-Assume *we* have some matrix \(A\) that does better than \(\Delta W^*\), meaning \[
+Assume we have some matrix \(A\) that does better than \(\Delta W^*\), meaning \[
 \langle -\nabla_{W} \mathcal{L}, A \rangle > \langle - \nabla_{W}\mathcal{L}, \Delta W^* \rangle. \tag{3}
 \]We'll show that \(\|A \|_\text{RMS} > \eta\) and therefore that \(A\) cannot be a solution to \((\dagger)\).
 
@@ -302,29 +310,13 @@ Therefore \(\|B\|_\text{RMS} = \|A\|_{\text{RMS}} > \eta\). So \(A\) *cannot* be
 
 
 ## Conclusion
-The Muon constrained optimization problem (\(\dagger\)) presents an interesting formulation of a weight update. Regularizing a gradient in stochastic optimization is very commonplace in practice today. But one reason Muon is interesting is because it derives a weight-space update \(\Delta W\) while imposing a *function-space* constraint \(\| \Delta W \|_\text{RMS} < \eta\).
-
-
-\[
-(W + \Delta W)x - Wx = (\Delta W) x.
-\]
-If we assume (or ensure) bounded inputs, say \(\|x\|_{\text{RMS}} \leq 1\), our condition on \(\Delta W\) ensures that the layer outputs can't change too much (in an RMS sense):
-\[
-\|(W + \Delta W)x - Wx\|_{\text{RMS}} = \|(\Delta W)x\|_{\text{RMS}} \leq \|\Delta W\|_{\text{RMS}} \|x\|_{\text{RMS}} \leq \eta.
-\]
-This arguably isn't the real insight of Muon—the idea connects to a slightly older literature on *spectral normalization* in learning algorithms. The real contribution of Muon is to provide a computationally efficient way to compute the optimal update \(\Delta W^*\) (without needing to take the SVD of \(-\nabla_{W} \mathcal{L}\)).
-
-
-But it's interesting that regularizing towards "function-space stability" performs so well in practice.
-
-
-And the proof, with the full understanding of the problem as maximizing an inner product over a norm ball, provides some insight into potentially an otherwise unintuitive formulation.
+In this article, we explored and proved the optimality of the solution \(\Delta W^*\) to the Muon constrained optimization problem (\(\dagger\)). We situated it within the framework of maximizing an inner product over a norm ball, and used this analogy to motivate the otherwise potentially-unintuitive formula.
 
 
 
 ----
 
-## Useful Facts
+## Appendix: Useful Facts
 ### Fact 1
 *The spectral norm of a matrix is its largest singular value.*
 
@@ -472,12 +464,8 @@ Therefore
 	\langle x, y \rangle_{V} \leq \|x\|_{V}\|y\|_{V}.
 	\]These inequalities *do not necessarily hold* for other norms. For example, consider the vector \(x \in \mathbb{R}^{2}\) given by \(x = (1, 1)\). And consider the \(\ell_{\infty}\) norm, \(\|y\|_\infty := \text{max}_i |y_i|\). The Cauchy-Schwarz inequality does not hold for the pairing between the standard inner product and the \(\ell_{\infty}\) norm:\[
 	\langle x, x \rangle_{\mathbb{R}^{2}} = 4 \geq \|x\|_{\infty}^{2} = 1.
-	\]In the setting of Muon, our inner product is the *Frobenius* inner product\[
-	\langle X, Y\rangle_{F} := \text{Tr}(X^TY),
-	\]but the norm we care about is a *spectral* norm, \[
-	\|X\|_{\text{RMS}} = \left(\sqrt{ n / m } \right)\|X\|_{*} = \sqrt{ \frac{n}{m} } \sigma_{\text{max}}(X).
-	\]The two are related, but the Frobenius inner product does *not* induce the RMS norm:\[
-	\langle X, X \rangle_{F} = \text{Tr}(X^TX) = \sqrt{ \sum_{i} \sigma_{i}^{2}(X) } \geq \sigma_{\text{max}}(X) = \|X\|_{*}.
+	\]In the Muon setting, we cannot use Cauchy-Schwarz because the Frobenius inner product does *not* induce the RMS norm:\[
+	\sqrt{ \langle X, X \rangle_{F} } = \sqrt{ \text{Tr}(X^TX) } = \sqrt{ \sum_{i} \sigma_{i}^{2}(X) } \geq \sigma_{\text{max}}(X) = \|X\|_{*}.
 	\]
 
 
