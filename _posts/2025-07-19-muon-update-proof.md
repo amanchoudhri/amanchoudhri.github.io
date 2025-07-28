@@ -18,7 +18,7 @@ In this post, I provide an optimality proof of the solution. If you're already f
 ## A quick recap of Muon
 Define a loss function \(\mathcal{L}\). Consider it as a function of the weights of one linear layer, \(W\). For a given change in the weights \(\Delta W\), the new loss value at \(W + \Delta W\) is approximately
 \[
-\mathcal{L}(W) + \langle \nabla_{W} \mathcal{L}, \Delta W \rangle,
+L(W + \Delta W) \approx \mathcal{L}(W) + \langle \nabla_{W} \mathcal{L}, \Delta W \rangle,
 \]
 using the first-order Taylor approximation. Here, the inner product \(\langle \cdot, \cdot \rangle\) is the *Frobenius inner product* on matrices,\[
 \langle A, B \rangle := \mathrm{Tr}(A^TB).
@@ -26,21 +26,23 @@ using the first-order Taylor approximation. Here, the inner product \(\langle \c
 \[
 \mathcal{L}(W + \Delta W) - \mathcal{L}(W) \approx \langle \nabla_{W} \mathcal{L}, \Delta W \rangle.
 \]
-Muon aims to maximize the improvement in loss, subject to a norm constraint on \(\Delta W\). 
+Muon aims to maximize the improvement in loss, subject to a norm constraint on \(\Delta W\).
+
+
 Specifically, it employs the *root-mean-square operator norm*, \(\|\cdot \|_\text{RMS}.\) We'll properly derive this norm below. But briefly, \(\|A\|_{\text{RMS}}\) is the *largest* possible factor by which a matrix \(A \in \mathbb{R}^{m \times n}\) can scale the size of its input, normalized by dimension:
 \[
-\|A\|_{\text{RMS}} := \sqrt{ \frac{n}{m} } \text{sup}_{x \neq 0} \frac{\|Ax\|_{2}}{\|x\|_{2}}
+\|A\|_{\text{RMS}} := \sqrt{ \frac{n}{m} } \text{sup}_{x \neq 0} \frac{\|Ax\|_{2}}{\|x\|_{2}} \tag{1}
 \]
 So we arrive at the constrained optimization problem (\(\dagger\)) that motivated Muon:
 \[
 \text{min} \  \langle \nabla_{W} \mathcal{L}, \Delta W \rangle \quad \text{s.t.} \quad \|\Delta W\|_\text{RMS} \leq \eta. \tag{†}
 \]
-The requirement that \(\|\Delta W\|_\text{RMS} < \eta\) is equivalent to the condition that the change in the layer's outputs is bounded by the size of its inputs:
+For intuition, the requirement that \(\|\Delta W\|_\text{RMS} < \eta\) is equivalent to the condition that the change in the layer's outputs is bounded by the size of its inputs. From (\(1\)),
 \[
-\|(\Delta W)x\|_{\text{RMS}} = \|(W + \Delta W)x - Wx \|_{\text{RMS}}
+\|(W + \Delta W)x - Wx \|_{\text{RMS}} = \|(\Delta W)x\|_{\text{RMS}}
 < \eta \sqrt{ \frac{m}{n} } \|x\|_{\text{2}},
 \]
-for all \(x\). The constraint \(\|\Delta W\|_{\text{RMS}} < \eta\) directly ensures that the layer's outputs don't change too much within an optimization step.
+for all \(x\). So the constraint \(\|\Delta W\|_{\text{RMS}} < \eta\) directly ensures that the layer's outputs don't change too much within an optimization step.
 
 
 If we take the singular value decomposition of the gradient as \(\nabla_{W} \mathcal{L} = U \Sigma V^T\), then the solution to \((\dagger)\) is given as the "orthogonalization," \[
@@ -82,7 +84,7 @@ The spectral norm of a matrix, the most \(A\) can stretch a vector in the \(\ell
 \]
 See [Fact 1](#fact-1) for a formal proof. Taking the equality at face value, we now observe,
 \[
-\|A\|_{\text{RMS}} = \text{sup}_{x \neq 0} \frac{\|Ax\|_{\text{RMS}}}{\|x\|_{\text{RMS}}} = \sqrt{ \frac{n}{m} } \text{sup}_{x \neq 0} \frac{\|Ax\|_{\text{2}}}{\|x\|_{\text{2}}} = \sqrt{ \frac{n}{m} } \sigma_\text{max}(A).
+\|A\|_{\text{RMS}} = \text{sup}_{x \neq 0} \frac{\|Ax\|_{\text{RMS}}}{\|x\|_{\text{RMS}}} = \sqrt{ \frac{n}{m} } \text{sup}_{x \neq 0} \frac{\|Ax\|_{\text{2}}}{\|x\|_{\text{2}}} = \sqrt{ \frac{n}{m} } \sigma_\text{max}(A). \tag{2}
 \]
 We now have all the machinery we need to solve the Muon problem (\(\dagger\)). Before we do so, let's warm up with a simpler problem.
 
@@ -96,13 +98,14 @@ The answer is likely immediately obvious: pick \(b\) in the *direction* of \(a\)
 \[
 b = \frac{\alpha}{\|a\|_{2}} a.
 \]
+![Graphic illustrating the constrained vector inner product optimization problem](/assets/img/muon-update-proof/vec-ip-graphic.png)
 Picking \(b\) to be "aligned with" \(a\) to maximize the inner product is pretty intuitive. But how might we prove this?
 
 
-*Proof:* One option is to assume that we've found a *better* candidate, say \(c\), and find a logical contradiction. If we find a contradiction, the better candidate \(c\) cannot actually exist—so we win.
+One option is to assume that we've found a *better* candidate, say \(c\), and find a logical contradiction. If we find a contradiction, the better candidate \(c\) cannot actually exist—so we win.
 
 
-Specifically, let's assume that we have \(c\) such that
+*Proof:* let's assume that we have \(c\) such that
 \[
 a^T c > a^T b = \alpha \|a\|_{2}.
 \]
@@ -209,6 +212,7 @@ Under our constraint on \(d_i\), then, the best solution to this reduced problem
 d_{i} := \eta \sqrt{ \frac{m}{n} }.
 \]
 If this isn't immediately obvious, try to prove it yourself.
+![A graphic illustrating the vectorized optimization problem over σ and d](/assets/img/muon-update-proof/vectorized-full-problem.png)
 
 
 Translating from the vector parameter \(d\) to the matrix parameter \(M\), the best solution to our restricted matrix-domain problem is therefore \[
