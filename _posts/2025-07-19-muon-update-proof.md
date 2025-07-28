@@ -15,6 +15,9 @@ In Jeremy Bernstein's great post [Deriving Muon](https://jeremybernste.in/writin
 In this post, I provide an optimality proof of the solution. If you're already familiar with Muon and the constrained optimization problem used to derive its weight update, [click here](#a-proof-of-optimality) to jump to the proof.
 
 
+*Addendum 2025-07-28:* Laker Newhouse pointed out that he and Jeremy also provide a proof of this result in [a Dec 2024 paper](https://arxiv.org/pdf/2409.20325). See Proposition 5 and its proof in Appendix B. Thanks Laker!
+
+
 ## A quick recap of Muon
 Define a loss function \(\mathcal{L}\). Consider it as a function of the weights of one linear layer, \(W\). For a given change in the weights \(\Delta W\), the new loss value at \(W + \Delta W\) is approximately
 \[
