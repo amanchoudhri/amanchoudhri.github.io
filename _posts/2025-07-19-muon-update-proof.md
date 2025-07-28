@@ -281,7 +281,7 @@ B_{ii} > \eta \sqrt{ m / n }. \tag{4}
 By [Fact 3](#fact-3), the RMS norm is invariant under orthogonal transformations, so \[\|A\|_\text{RMS} = \|B\|_{\text{RMS}}.\]
 It therefore suffices to show \(\|B\|_\text{RMS} > \eta.\) To do this, all we need to do is find *one vector* \(v\) such that
 \[
-\|Bv\|_{\text{RMS}} > \eta\|v\|_{\text{RMS}}.
+\|Bv\|_{\text{RMS}} > \eta\|v\|_{\text{RMS}}. \tag{5}
 \]
 Pick \(v\) to be the \(i\)th coordinate vector, meaning
 \[
@@ -297,7 +297,8 @@ So \(Bv\) is just the \(i\)th column of \(B\), meaning
 \[
 (Bv)_{j} = B_{ij}.
 \]
-In particular, \((Bv)_i = B_{ii}.\) So \[
+In particular, \((Bv)_i = B_{ii}.\) Now, we can calculate \(\|Bv\|_2\) and attempt to show (\(5\)).
+\[
 \|Bv\|_{2}^{2} = v^T B^T Bv = \sum_{j} B_{ij}^{2} \geq B_{ii}^{2},
 \]since all other terms in the sum are nonnegative: \(B_{ij}^{2} \geq 0\). But from equation \((4)\), we therefore have that
 \[
